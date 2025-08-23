@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Model Quotation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .model-display {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .model-display h2 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .model-display .model-name {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 26px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .form-control[readonly] {
+            background-color: #f8f9fa;
+            color: #495057;
+            cursor: not-allowed;
+        }
+
+        .price-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .price-box {
+            flex: 1;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .price-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .offer-options {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #9b59b6;
+        }
+
+        .offer-options h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .radio-group {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #3498db;
+        }
+
+        .radio-group label {
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        @media (max-width: 576px) {
+            .price-container {
+                flex-direction: column;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .model-display .model-name {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Car Model Quotation</h1>
+            <p>Your personalized vehicle information</p>
+        </div>
+
+        <div class="content">
+            <div class="model-display">
+                <h2>Selected Model:</h2>
+                <div class="model-name" id="model_name">No model selected</div>
+            </div>
+
+            <div class="price-container">
+                <div class="price-box">
+                    <div class="price-label">Instalment Price(for 6 months)</div>
+                    <div class="price-value" id="initial_price">$0</div>
+                </div>
+                <div class="price-box">
+                    <div class="price-label">One-off Purchase Price</div>
+                    <div class="price-value" id="offer_price">$0</div>
+                </div>
+            </div>
+
+            <div class="offer-options">
+                <h3>Select Your Desired Offer</h3>
+                <div class="radio-group">
+                    <input type="radio" id="offer1" name="offer" value="Standard Package">
+                    <label for="offer1">Standard Package - $<span id="standard-price">0</span></label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="offer2" name="offer" value="Premium Package">
+                    <label for="offer2">Premium Package - $<span id="premium-price">0</span> (+15%)</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="offer3" name="offer" value="Luxury Package">
+                    <label for="offer3">Luxury Package - $<span id="luxury-price">0</span> (+25%)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+            </div>
+
+            <button class="btn" id="contact-btn" disabled>Contact Sales Representative</button>
+
+            <div class="footer">
+                <p>This information will be sent to our sales team for processing</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const modelName = urlParams.get("model_name") || "Unknown Model";
+            const initialPrice = parseInt(urlParams.get("i_price")) || 0;
+            const offerPrice = parseInt(urlParams.get("o_price")) || 0;
+
+            // Display the values
+            document.getElementById("model_name").textContent = modelName;
+            document.getElementById("initial_price").textContent = `$${initialPrice.toLocaleString()}`;
+            document.getElementById("offer_price").textContent = `$${offerPrice.toLocaleString()}`;
+            
+            // Calculate package prices
+            const standardPrice = offerPrice;
+            const premiumPrice = Math.round(offerPrice * 1.15);
+            const luxuryPrice = Math.round(offerPrice * 1.25);
+            
+            // Display package prices
+            document.getElementById("standard-price").textContent = standardPrice.toLocaleString();
+            document.getElementById("premium-price").textContent = premiumPrice.toLocaleString();
+            document.getElementById("luxury-price").textContent = luxuryPrice.toLocaleString();
+            
+            // Set default selection
+            document.getElementById("offer1").checked = true;
+            
+            // Enable button when form is filled
+            const inputs = document.querySelectorAll('#name, #email, #phone');
+            const contactBtn = document.getElementById('contact-btn');
+            
+            function checkForm() {
+                let allFilled = true;
+                inputs.forEach(input => {
+                    if (input.value.trim() === '') {
+                        allFilled = false;
+                    }
+                });
+                contactBtn.disabled = !allFilled;
+            }
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', checkForm);
+                input.addEventListener('blur', function() {
+                    if (this.value.trim() === '') {
+                        this.style.borderColor = '#e74c3c';
+                    } else {
+                        this.style.borderColor = '#ddd';
+                    }
+                });
+            });
+
+            // Contact button functionality
+            contactBtn.addEventListener("click", function() {
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const phone = document.getElementById("phone").value;
+                
+                // Get selected offer
+                const selectedOffer = document.querySelector('input[name="offer"]:checked');
+                const offerText = selectedOffer ? selectedOffer.value : "No offer selected";
+                
+                // Calculate price for selected offer
+                let selectedPrice = offerPrice;
+                if (selectedOffer.value === "Premium Package") {
+                    selectedPrice = Math.round(offerPrice * 1.15);
+                } else if (selectedOffer.value === "Luxury Package") {
+                    selectedPrice = Math.round(offerPrice * 1.25);
+                }
+
+                const subject = `Inquiry about ${modelName} - ${offerText}`;
+                const body = `Hello,\n\nI am interested in the ${modelName} with the ${offerText} ($${selectedPrice.toLocaleString()}).\n\nPlease contact me at ${phone} or ${email} to discuss this offer.\n\nBest regards,\n${name}`;
+
+                window.location.href = `mailto:sprite_chat@tutamail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            });
+        });
+    </script>
+</body>
+</html>
