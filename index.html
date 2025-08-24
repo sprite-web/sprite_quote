@@ -222,7 +222,7 @@
 
             <div class="price-container">
                 <div class="price-box">
-                    <div class="price-label">Instalment Price(for 6 months)</div>
+                    <div class="price-label">Instalment Price (for 6 months)</div>
                     <div class="price-value" id="initial_price">$0</div>
                 </div>
                 <div class="price-box">
@@ -234,16 +234,16 @@
             <div class="offer-options">
                 <h3>Select Your Desired Offer</h3>
                 <div class="radio-group">
-                    <input type="radio" id="offer1" name="offer" value="Standard Package">
-                    <label for="offer1">Standard Package - $<span id="standard-price">0</span></label>
+                    <input type="radio" id="offer1" name="offer" value="Standard Package" checked>
+                    <label for="offer1">Standard Package - $<span id="standard-price">30,000</span></label>
                 </div>
                 <div class="radio-group">
                     <input type="radio" id="offer2" name="offer" value="Premium Package">
-                    <label for="offer2">Premium Package - $<span id="premium-price">0</span> (+15%)</label>
+                    <label for="offer2">Premium Package - $<span id="premium-price">34,500</span> (+15%)</label>
                 </div>
                 <div class="radio-group">
                     <input type="radio" id="offer3" name="offer" value="Luxury Package">
-                    <label for="offer3">Luxury Package - $<span id="luxury-price">0</span> (+25%)</label>
+                    <label for="offer3">Luxury Package - $<span id="luxury-price">37,500</span> (+25%)</label>
                 </div>
             </div>
 
@@ -272,29 +272,60 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Base prices for each model
+            const modelPrices = {
+                "Model S": 30000,
+                "Model 3": 35000,
+                "Model X": 40000,
+                "Model Y": 45000,
+                "Cybertruck": 50000
+            };
+            
             // Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
-            const modelName = urlParams.get("model_name") || "Unknown Model";
-            const initialPrice = parseInt(urlParams.get("i_price")) || 0;
-            const offerPrice = parseInt(urlParams.get("o_price")) || 0;
-
-            // Display the values
+            const modelName = urlParams.get("model_name") || "Model S";
+            
+            // Set base price based on model
+            const basePrice = urlParams.get("bprice");
+            
+            // Display the model name
             document.getElementById("model_name").textContent = modelName;
-            document.getElementById("initial_price").textContent = `$${initialPrice.toLocaleString()}`;
-            document.getElementById("offer_price").textContent = `$${offerPrice.toLocaleString()}`;
             
             // Calculate package prices
-            const standardPrice = offerPrice;
-            const premiumPrice = Math.round(offerPrice * 1.15);
-            const luxuryPrice = Math.round(offerPrice * 1.25);
+            const standardPrice = basePrice;
+            const premiumPrice = Math.round(basePrice * 1.15);
+            const luxuryPrice = Math.round(basePrice * 1.25);
             
             // Display package prices
             document.getElementById("standard-price").textContent = standardPrice.toLocaleString();
             document.getElementById("premium-price").textContent = premiumPrice.toLocaleString();
             document.getElementById("luxury-price").textContent = luxuryPrice.toLocaleString();
             
-            // Set default selection
-            document.getElementById("offer1").checked = true;
+            // Function to update prices based on selected package
+            function updatePrices() {
+                const selectedOffer = document.querySelector('input[name="offer"]:checked');
+                let selectedPrice = basePrice;
+                
+                if (selectedOffer.value === "Premium Package") {
+                    selectedPrice = premiumPrice;
+                } else if (selectedOffer.value === "Luxury Package") {
+                    selectedPrice = luxuryPrice;
+                }
+                
+                const installmentPrice = Math.round(selectedPrice * 1.2 / 6);
+                
+                // Update displayed prices
+                document.getElementById("initial_price").textContent = `$${installmentPrice.toLocaleString()}`;
+                document.getElementById("offer_price").textContent = `$${selectedPrice.toLocaleString()}`;
+            }
+            
+            // Initial price update
+            updatePrices();
+            
+            // Add event listeners to radio buttons
+            document.querySelectorAll('input[name="offer"]').forEach(radio => {
+                radio.addEventListener('change', updatePrices);
+            });
             
             // Enable button when form is filled
             const inputs = document.querySelectorAll('#name, #email, #phone');
@@ -320,7 +351,7 @@
                     }
                 });
             });
-
+            
             // Contact button functionality
             contactBtn.addEventListener("click", function() {
                 const name = document.getElementById("name").value;
@@ -331,17 +362,12 @@
                 const selectedOffer = document.querySelector('input[name="offer"]:checked');
                 const offerText = selectedOffer ? selectedOffer.value : "No offer selected";
                 
-                // Calculate price for selected offer
-                let selectedPrice = offerPrice;
-                if (selectedOffer.value === "Premium Package") {
-                    selectedPrice = Math.round(offerPrice * 1.15);
-                } else if (selectedOffer.value === "Luxury Package") {
-                    selectedPrice = Math.round(offerPrice * 1.25);
-                }
-
+                // Get the selected price
+                const selectedPrice = parseInt(document.getElementById("offer_price").textContent.replace('$', '').replace(/,/g, ''));
+                
                 const subject = `Inquiry about ${modelName} - ${offerText}`;
                 const body = `Hello,\n\nI am interested in the ${modelName} with the ${offerText} ($${selectedPrice.toLocaleString()}).\n\nPlease contact me at ${phone} or ${email} to discuss this offer.\n\nBest regards,\n${name}`;
-
+                
                 window.location.href = `mailto:sprite_chat@tutamail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             });
         });
