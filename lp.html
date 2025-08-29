@@ -320,7 +320,7 @@
           step="0.01"
           disabled
         />
-        <div class="input-hint">Minimum stake: 0.1 ETH</div>
+        <div class="input-hint">Minimum stake: 0.5 ETH</div>
       </div>
 
       <div class="action-buttons">
@@ -372,7 +372,7 @@
       // Enable stake button only if amount >= 0.1 ETH
       stakeAmountInput.addEventListener('input', () => {
         const val = parseFloat(stakeAmountInput.value);
-        stakeButton.disabled = !(val >= 0.1);
+        stakeButton.disabled = !(val >= 0.5);
       });
 
       // Connect wallet handler
@@ -419,8 +419,8 @@
         }
 
         const ethAmount = parseFloat(stakeAmountInput.value);
-        if (!(ethAmount >= 0.1)) {
-          showNotification('Minimum stake amount is 0.1 ETH', true);
+        if (!(ethAmount >= 0.5)) {
+          showNotification('Minimum stake amount is 0.5 ETH', true);
           return;
         }
 
