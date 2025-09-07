@@ -1,1 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Summary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      background: #f7f7f7;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .product {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    button.checkout {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.checkout:hover {
+      background-color: #0056b3;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #666;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .secured {
+      text-align: center;
+      margin-top: 25px;
+      font-weight: bold;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
 
+<h2 id="order-title">Order Summary</h2>
+
+  <div class="product">
+    <div>Product: <strong id="product-name">Loading...</strong></div>
+    <div>Price: <strong id="product-price">Loading...</strong></div>
+  </div>
+
+  <div class="total" id="total-amount">Total: Loading...</div>
+
+  <button class="checkout" id="checkout-button">Checkout</button>
+
+<p class="note">NOTE: each order is only valid for 30 minutes</p>
+
+<h4 class="secured">Secured by GooglePay</h4>
+
+<script>
+  // Function to get URL parameters
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Function to update page content based on URL parameters
+  function updateOrderDetails() {
+    // Get values from URL parameters
+    const orderId = getQueryParam('orderId') || 'N/A';
+    const product = getQueryParam('product') || 'Unknown Product';
+    const currency = getQueryParam('cur') || 'USD';
+    const price = '5.00';
+    
+    // Update the page content
+    document.getElementById('order-title').textContent = `Order ID: #${orderId}`;
+    document.getElementById('product-name').textContent = product;
+    document.getElementById('product-price').textContent = `${price}${currency}`;
+    document.getElementById('total-amount').textContent = `Total: ${price}${currency}`;
+    
+    // Update checkout button URL
+    document.getElementById('checkout-button').onclick = function() {
+      window.location.href = `checkout.html?cur=${currency}`;
+    };
+  }
+
+  // Update page when it loads
+  document.addEventListener('DOMContentLoaded', updateOrderDetails);
+</script>
+
+</body>
+</html>
