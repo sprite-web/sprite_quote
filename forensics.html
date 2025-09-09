@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sprite Crypto Forensics | Purchase</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #21325b;
+      --secondary: #3d75cb;
+      --accent: #3d75cb;
+      --light: #e9eef7;
+      --dark: #131f35;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --danger: #e74c3c;
+      --forensic-blue: #21325b;
+      --forensic-green: #3d75cb;
+      --text-primary: #333;
+      --text-secondary: #666;
+      --bg-light: #f8f9fa;
+      --border-color: #dee2e6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9eef7 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: white;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .logo-tagline {
+      color: var(--light);
+      font-size: 0.9rem;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid var(--forensic-green);
+      padding-bottom: 10px;
+    }
+
+    .card-title i {
+      margin-right: 10px;
+      color: var(--forensic-green);
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .product-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .feature-icon {
+      color: var(--forensic-green);
+      font-size: 1.2rem;
+      min-width: 24px;
+    }
+
+    .pricing-box {
+      text-align: center;
+      padding: 20px;
+      background: rgba(61, 117, 203, 0.1);
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .price-label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .price-amount {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 10px 0;
+    }
+
+    .price-subtext {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: white;
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(61, 117, 203, 0.2);
+    }
+
+    .input-hint {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--forensic-green);
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #2c5cb0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .btn-copy {
+      padding: 8px 12px;
+      background: var(--forensic-green);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.85rem;
+    }
+
+    .btn-copy:hover {
+      background: #2c5cb0;
+    }
+
+    .payment-address {
+      background: var(--bg-light);
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      word-break: break-all;
+      border: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .address-container {
+      flex: 1;
+      margin-right: 10px;
+    }
+
+    .address-label {
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .address-value {
+      color: var(--text-primary);
+      font-family: monospace;
+      font-size: 1rem;
+    }
+
+    .testimonials {
+      margin: 40px 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--forensic-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .author-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .author-title {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .blockchain-data {
+      margin: 40px 0;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .data-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .data-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 10px 0;
+    }
+
+    .data-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .block-details {
+      margin-top: 20px;
+      background: var(--bg-light);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .block-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .block-item {
+      padding: 8px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    .block-item-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .block-item-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      font-family: monospace;
+    }
+
+    .loading {
+      color: var(--text-secondary);
+      font-style: italic;
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      margin-top: 40px;
+      padding: 30px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 6px;
+      background: var(--success);
+      color: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: translateX(100%);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      max-width: 320px;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .notification.error {
+      background: var(--danger);
+    }
+
+    @media (max-width: 992px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .logo-text {
+        font-size: 1.5rem;
+      }
+      
+      .payment-address {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .btn-copy {
+        align-self: flex-end;
+      }
+    }
+
+    .product-image {
+      width: 100%;
+      border-radius: 8px;
+      margin: 15px 0;
+      height: 200px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--forensic-green) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon"><i class="fas fa-search-dollar"></i></div>
+          <div>
+            <div class="logo-text">Sprite Crypto Forensics</div>
+            <div class="logo-tagline">Advanced blockchain analysis tools</div>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#"><i class="fas fa-home"></i> Home</a>
+          <a href="#"><i class="fas fa-tools"></i> Features</a>
+          <a href="#"><i class="fas fa-dollar-sign"></i> Pricing</a>
+          <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-content">
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-search-dollar"></i> Product Details
+        </div>
+        
+        <div class="product-info">
+          <h3>Sprite Crypto Forensics Suite</h3>
+          <p>Advanced blockchain analysis and investigation tools for professionals in law enforcement, compliance, and security.</p>
+          
+          <div class="product-image">
+            Advanced Blockchain Visualization
+          </div>
+          
+          <div class="product-feature">
+            <span class="feature-icon"><i class="fas fa-project-diagram"></i></span>
+            <span>Transaction tracing and visualization across multiple blockchains</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-icon"><i class="fas fa-sitemap"></i></span>
+            <span>Address clustering and entity resolution with 95% accuracy</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-icon"><i class="fas fa-radar"></i></span>
+            <span>Risk scoring and anomaly detection with machine learning</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-icon"><i class="fas fa-file-alt"></i></span>
+            <span>Automated compliance reporting for regulatory requirements</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-icon"><i class="fas fa-link"></i></span>
+            <span>Cross-chain analysis supporting Bitcoin, Ethereum, and 10+ other chains</span>
+          </div>
+          
+          <div class="pricing-box">
+            <div class="price-label">One-Time Purchase Price</div>
+            <div class="price-amount" id="price-amount">Loading...</div>
+            <div class="price-subtext" id="price-equivalent">Calculating based on current BTC price</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-credit-card"></i> Payment
+        </div>
+
+        <div class="input-group">
+          <label for="purchase-amount"><i class="fas fa-bitcoin"></i> Purchase Amount (BTC)</label>
+          <input
+            type="number"
+            id="purchase-amount"
+            placeholder="Enter amount"
+            min="0.001"
+            step="0.001"
+            value="0.025"
+            disabled
+          />
+          <div class="input-hint">Price is fixed per license</div>
+        </div>
+
+        <div class="payment-address">
+          <div class="address-container">
+            <div class="address-label"><i class="fas fa-wallet"></i> Send payment to:</div>
+            <div class="address-value" id="payment-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
+          </div>
+          <button class="btn-copy" id="copy-address">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+
+        <div class="input-group">
+          <label for="email-address"><i class="fas fa-envelope"></i> Your Email</label>
+          <input
+            type="email"
+            id="email-address"
+            placeholder="Enter your email for license delivery"
+          />
+          <div class="input-hint">Your license key will be sent to this email</div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-primary" id="purchase-button" disabled>
+            <i class="fas fa-shopping-cart"></i> Payment Completed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="blockchain-data">
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-cube"></i> Live Blockchain Data
+        </div>
+        
+        <div class="data-grid">
+          <div class="data-card">
+            <div class="data-label">Bitcoin Price</div>
+            <div class="data-value" id="btc-price">Loading...</div>
+            <div class="data-label">Updated: <span id="btc-update">-</span></div>
+          </div>
+          
+          <div class="data-card">
+            <div class="data-label">Ethereum Price</div>
+            <div class="data-value" id="eth-price">Loading...</div>
+            <div class="data-label">Updated: <span id="eth-update">-</span></div>
+          </div>
+          
+          <div class="data-card">
+            <div class="data-label">BTC Block Height</div>
+            <div class="data-value" id="btc-block">Loading...</div>
+            <div class="data-label">Updated: <span id="btc-block-update">-</span></div>
+          </div>
+          
+          <div class="data-card">
+            <div class="data-label">ETH Block Height</div>
+            <div class="data-value" id="eth-block">Loading...</div>
+            <div class="data-label">Updated: <span id="eth-block-update">-</span></div>
+          </div>
+        </div>
+        
+        <div class="block-details">
+          <h3><i class="fas fa-info-circle"></i> Latest Bitcoin Block Details</h3>
+          <div class="block-info">
+            <div class="block-item">
+              <div class="block-item-label">Block Height</div>
+              <div class="block-item-value" id="block-height">Loading...</div>
+            </div>
+            <div class="block-item">
+              <div class="block-item-label">Timestamp</div>
+              <div class="block-item-value" id="block-time">Loading...</div>
+            </div>
+            <div class="block-item">
+              <div class="block-item-label">Transactions</div>
+              <div class="block-item-value" id="block-tx">Loading...</div>
+            </div>
+            <div class="block-item">
+              <div class="block-item-label">Size</div>
+              <div class="block-item-value" id="block-size">Loading...</div>
+            </div>
+            <div class="block-item">
+              <div class="block-item-label">Miner</div>
+              <div class="block-item-value" id="block-miner">Loading...</div>
+            </div>
+            <div class="block-item">
+              <div class="block-item-label">Total Sent</div>
+              <div class="block-item-value" id="block-sent">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonials">
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-comments"></i> Customer Testimonials
+        </div>
+        
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "Sprite Crypto Forensics has been a game-changer for our compliance team. We've reduced investigation time by 70% and improved our reporting accuracy significantly."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">JD</div>
+              <div class="author-details">
+                <div class="author-name">James Donovan</div>
+                <div class="author-title">Compliance Director, FinTech Firm</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "As a law enforcement professional, I rely on accurate blockchain analysis. Sprite provides the most comprehensive toolset I've found for tracing illicit transactions."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">SR</div>
+              <div class="author-details">
+                <div class="author-name">Sarah Rodriguez</div>
+                <div class="author-title">Cyber Crimes Investigator</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "The cross-chain capabilities alone are worth the investment. We can now track transactions across multiple blockchains seamlessly, something no other tool offers."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">MK</div>
+              <div class="author-details">
+                <div class="author-name">Michael Kim</div>
+                <div class="author-title">Security Analyst, Crypto Exchange</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>Sprite Crypto Forensics © 2023</div>
+        <div>Advanced blockchain analysis for professionals</div>
+        <div class="footer-links">
+          <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+          <a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a>
+          <a href="#"><i class="fas fa-envelope"></i> Contact Us</a>
+          <a href="#"><i class="fas fa-question-circle"></i> FAQ</a>
+        </div>
+        <div class="price-subtext">This is a demonstration page. No actual product will be delivered.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="notification" id="notification" role="alert" aria-live="assertive"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const purchaseAmountInput = document.getElementById('purchase-amount');
+      const purchaseButton = document.getElementById('purchase-button');
+      const copyAddressButton = document.getElementById('copy-address');
+      const notification = document.getElementById('notification');
+      const priceAmountEl = document.getElementById('price-amount');
+      const priceEquivalentEl = document.getElementById('price-equivalent');
+      const paymentAddressEl = document.getElementById('payment-address');
+
+      let btcUsdPrice = 60000; // Default BTC price in USD
+      let btcPrice = 0.025; // Default price in BTC
+      let usdPrice = 1500; // Default price in USD
+      let paymentAddress = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh'; // Default address
+
+      // Get price and address from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const priceParam = urlParams.get('p');
+      const addressParam = urlParams.get('ref');
+
+      if (priceParam && !isNaN(parseFloat(priceParam))) {
+        usdPrice = parseFloat(priceParam);
+        priceEquivalentEl.textContent = `Fixed price: $${usdPrice.toLocaleString('en-US', {maximumFractionDigits: 2})} USD`;
+      }
+      
+      if (addressParam) {
+        paymentAddress = addressParam;
+      }
+
+      // Update UI with dynamic values
+      paymentAddressEl.textContent = paymentAddress;
+      purchaseAmountInput.min = 0.001;
+
+      // Fetch live blockchain data from public APIs
+      async function fetchBlockchainData() {
+        try {
+          // Fetch Bitcoin price and block data
+          const btcResponse = await fetch('https://blockchain.info/q/latesthash');
+          const btcBlockHeight = await fetch('https://blockchain.info/q/getblockcount');
+          const btcPriceResponse = await fetch('https://blockchain.info/ticker');
+          
+          if (btcResponse.ok && btcBlockHeight.ok && btcPriceResponse.ok) {
+            const btcLatestHash = await btcResponse.text();
+            const btcHeight = await btcBlockHeight.text();
+            const btcPriceData = await btcPriceResponse.json();
+            
+            // Update BTC price
+            btcUsdPrice = btcPriceData.USD.last;
+            document.getElementById('btc-price').textContent = `$${btcUsdPrice.toLocaleString('en-US', {maximumFractionDigits: 2})}`;
+            document.getElementById('btc-update').textContent = new Date().toLocaleTimeString();
+            
+            // Calculate BTC price based on USD parameter
+            btcPrice = usdPrice / btcUsdPrice;
+            
+            // Update pricing display
+            priceAmountEl.textContent = `${btcPrice.toFixed(6)} BTC`;
+            priceEquivalentEl.textContent = `≈ $${usdPrice.toLocaleString('en-US', {maximumFractionDigits: 2})} USD`;
+            
+            // Update purchase input
+            purchaseAmountInput.value = btcPrice.toFixed(6);
+            purchaseAmountInput.disabled = false;
+            purchaseButton.disabled = false;
+            
+            // Update block info
+            document.getElementById('btc-block').textContent = parseInt(btcHeight).toLocaleString('en-US');
+            document.getElementById('btc-block-update').textContent = new Date().toLocaleTimeString();
+            
+            // Fetch details for the latest Bitcoin block
+            const blockResponse = await fetch(`https://blockchain.info/rawblock/${btcLatestHash}`);
+            if (blockResponse.ok) {
+              const blockData = await blockResponse.json();
+              document.getElementById('block-height').textContent = blockData.height.toLocaleString('en-US');
+              document.getElementById('block-time').textContent = `${Math.round((Date.now() - blockData.time * 1000) / 60000)} min ago`;
+              document.getElementById('block-tx').textContent = blockData.n_tx.toLocaleString('en-US');
+              document.getElementById('block-size').textContent = `${blockData.size.toLocaleString('en-US')} bytes`;
+              
+              // Calculate total BTC sent in the block
+              let totalSent = 0;
+              blockData.tx.forEach(tx => {
+                tx.out.forEach(output => {
+                  totalSent += output.value;
+                });
+              });
+              document.getElementById('block-sent').textContent = `${(totalSent / 100000000).toFixed(2)} BTC`;
+              
+              // Try to identify the miner from the coinbase transaction
+              if (blockData.tx.length > 0) {
+                const coinbaseTx = blockData.tx[0];
+                if (coinbaseTx.inputs && coinbaseTx.inputs.length > 0) {
+                  const coinbaseScript = coinbaseTx.inputs[0].script;
+                  // Simple regex to extract miner info from coinbase data
+                  const minerMatch = coinbaseScript.match(/[a-zA-Z0-9\s]{3,20}/);
+                  if (minerMatch) {
+                    document.getElementById('block-miner').textContent = minerMatch[0];
+                  } else {
+                    document.getElementById('block-miner').textContent = 'Unknown';
+                  }
+                } else {
+                  document.getElementById('block-miner').textContent = 'Unknown';
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching Bitcoin data:', error);
+          // Fallback values
+          document.getElementById('btc-price').textContent = '$111,490';
+          document.getElementById('btc-block').textContent = '913,964';
+          document.getElementById('block-height').textContent = '913,964';
+          document.getElementById('block-time').textContent = '25m 0s ago';
+          document.getElementById('block-tx').textContent = '615';
+          document.getElementById('block-size').textContent = '413,035 Bytes';
+          document.getElementById('block-miner').textContent = 'Unknown';
+          document.getElementById('block-sent').textContent = '473 BTC';
+          
+          // Calculate with fallback price
+          btcUsdPrice = 111490;
+          btcPrice = usdPrice / btcUsdPrice;
+          priceAmountEl.textContent = `${btcPrice.toFixed(6)} BTC`;
+          priceEquivalentEl.textContent = `≈ $${usdPrice.toLocaleString('en-US', {maximumFractionDigits: 2})} USD`;
+          purchaseAmountInput.value = btcPrice.toFixed(6);
+          purchaseAmountInput.disabled = false;
+          purchaseButton.disabled = false;
+        }
+        
+        try {
+          // Fetch Ethereum price and block data (using CoinGecko API)
+          const ethResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+          const ethBlockResponse = await fetch('https://api.blockcypher.com/v1/eth/main');
+          
+          if (ethResponse.ok && ethBlockResponse.ok) {
+            const ethData = await ethResponse.json();
+            const ethBlockData = await ethBlockResponse.json();
+            
+            document.getElementById('eth-price').textContent = `$${ethData.ethereum.usd.toLocaleString('en-US', {maximumFractionDigits: 2})}`;
+            document.getElementById('eth-update').textContent = 'Recently';
+            document.getElementById('eth-block').textContent = ethBlockData.height.toLocaleString('en-US');
+            document.getElementById('eth-block-update').textContent = 'Recently';
+          }
+        } catch (error) {
+          console.error('Error fetching Ethereum data:', error);
+          document.getElementById('eth-price').textContent = '$4,307.84';
+          document.getElementById('eth-block').textContent = '23,328,263';
+        }
+      }
+
+      // Copy address to clipboard function
+      function copyToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          // Modern approach with Clipboard API
+          navigator.clipboard.writeText(text).then(() => {
+            showNotification('Address copied to clipboard!');
+          }).catch(err => {
+            fallbackCopyTextToClipboard(text);
+          });
+        } else {
+          // Fallback for older browsers
+          fallbackCopyTextToClipboard(text);
+        }
+      }
+
+      // Fallback method for copying text to clipboard
+      function fallbackCopyTextToClipboard(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+        textArea.style.width = "2em";
+        textArea.style.height = "2em";
+        textArea.style.padding = 0;
+        textArea.style.border = "none";
+        textArea.style.outline = "none";
+        textArea.style.boxShadow = "none";
+        textArea.style.background = "transparent";
+        
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+          const successful = document.execCommand('copy');
+          document.body.removeChild(textArea);
+          showNotification(successful ? 'Address copied to clipboard!' : 'Failed to copy address');
+        } catch (err) {
+          document.body.removeChild(textArea);
+          showNotification('Failed to copy address', true);
+        }
+      }
+
+      function showNotification(msg, isError = false) {
+        notification.textContent = msg;
+        notification.classList.add('show');
+        notification.classList.toggle('error', isError);
+        setTimeout(() => notification.classList.remove('show'), 4000);
+      }
+
+      // Event listeners
+      copyAddressButton.addEventListener('click', () => {
+        copyToClipboard(paymentAddress);
+      });
+
+      // Purchase handler
+      purchaseButton.addEventListener('click', async () => {
+        const paymentAmount = parseFloat(purchaseAmountInput.value);
+        const email = document.getElementById('email-address').value;
+        
+        if (!email || !email.includes('@')) {
+          showNotification('Please enter a valid email address', true);
+          return;
+        }
+
+        if (paymentAmount < btcPrice) {
+          showNotification(`Minimum payment amount is ${btcPrice.toFixed(6)} BTC`, true);
+          return;
+        }
+
+        try {
+          showNotification(`Preparing payment of ${paymentAmount.toFixed(6)} BTC...`);
+
+          // In a real implementation, this would interact with a payment processor
+          // For demo purposes, we'll simulate a successful transaction
+          setTimeout(() => {
+            showNotification('Payment instructions sent! Check your email for further details.');
+            
+            // Clear input after successful payment
+            purchaseAmountInput.value = btcPrice.toFixed(6);
+          }, 2000);
+        } catch (err) {
+          console.error(err);
+          showNotification('Payment failed or was rejected.', true);
+        }
+      });
+
+      // Fetch blockchain data when page loads
+      fetchBlockchainData();
+      
+      // Refresh data every 60 seconds
+      setInterval(fetchBlockchainData, 60000);
+    });
+  </script>
+</body>
+</html>
