@@ -1,1 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verizon | Phone Purchase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --verizon-red: #cd040b;
+            --verizon-dark: #2c2a29;
+            --verizon-light: #f4f4f4;
+            --verizon-gray: #666;
+            --verizon-blue: #0066cc;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--verizon-light);
+            color: var(--verizon-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            background-color: var(--verizon-dark);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header-main {
+            padding: 15px 0;
+        }
+
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            color: var(--verizon-red);
+            font-size: 32px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--verizon-dark);
+        }
+
+        .logo-text span {
+            color: var(--verizon-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--verizon-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            color: var(--verizon-red);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            padding: 5px;
+            outline: none;
+            width: 200px;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 22px;
+            color: var(--verizon-dark);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--verizon-red);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--verizon-blue), #004c99);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-banner h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero-banner p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .product-page {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 30px;
+        }
+
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .product-details {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .product-title {
+            font-size: 28px;
+            margin-bottom: 5px;
+            color: var(--verizon-dark);
+        }
+
+        .product-model {
+            font-size: 18px;
+            color: var(--verizon-gray);
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--verizon-red);
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            margin-bottom: 20px;
+            color: var(--verizon-gray);
+            line-height: 1.8;
+        }
+
+        /* Specs Table */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .specs-table th {
+            background-color: var(--verizon-dark);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .specs-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .specs-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Options */
+        .options {
+            margin-bottom: 25px;
+        }
+
+        .option-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--verizon-dark);
+            font-size: 18px;
+        }
+
+        .color-options, .storage-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .color-option, .storage-option {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover, .storage-option:hover {
+            border-color: var(--verizon-red);
+        }
+
+        .color-option.active, .storage-option.active {
+            border-color: var(--verizon-red);
+            background-color: rgba(205, 4, 11, 0.1);
+        }
+
+        /* Purchase Options */
+        .purchase-options {
+            margin-bottom: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .purchase-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .purchase-option:hover {
+            border-color: var(--verizon-red);
+        }
+
+        .purchase-option.active {
+            border-color: var(--verizon-red);
+            background-color: rgba(205, 4, 11, 0.1);
+        }
+
+        .purchase-option input {
+            margin-right: 10px;
+        }
+
+        .option-details {
+            flex: 1;
+        }
+
+        .option-title-small {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .option-description {
+            font-size: 14px;
+            color: var(--verizon-gray);
+        }
+
+        .option-price {
+            font-weight: bold;
+            color: var(--verizon-red);
+            font-size: 20px;
+        }
+
+        /* Request ID Modal */
+        .request-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .request-modal.active {
+            display: flex;
+        }
+
+        .request-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .request-modal h2 {
+            margin-bottom: 20px;
+            color: var(--verizon-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .request-modal h2 i {
+            color: var(--verizon-red);
+        }
+
+        .request-id-display {
+            background-color: #f9f9f9;
+            border: 2px dashed #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--verizon-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: var(--verizon-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #0055aa;
+        }
+
+        .request-info {
+            background-color: #f0f7ff;
+            border-left: 4px solid var(--verizon-blue);
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .request-info p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--verizon-red);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #a80309;
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: var(--verizon-dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            color: var(--verizon-dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            border-color: var(--verizon-red);
+            color: var(--verizon-red);
+        }
+
+        .action-btn.request-btn {
+            background-color: var(--verizon-blue);
+            color: white;
+            border-color: var(--verizon-blue);
+        }
+
+        .action-btn.request-btn:hover {
+            background-color: #0055aa;
+            border-color: #0055aa;
+        }
+
+        /* Add to Cart */
+        .add-to-cart-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .add-to-cart {
+            background-color: var(--verizon-red);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #a80309;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1001;
+        }
+
+        .notification.active {
+            display: block;
+            animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-20px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--verizon-dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: #ccc;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .search-bar input {
+                width: 150px;
+            }
+
+            .hero-banner h1 {
+                font-size: 28px;
+            }
+
+            .product-page {
+                flex-direction: column;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div>Welcome to Verizon</div>
+                <div>Shop with confidence | 100% satisfaction guaranteed</div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="#" class="logo">
+                    <i class="fas fa-signal logo-icon"></i>
+                    <div class="logo-text">VERI<span>ZON</span></div>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Phones</a></li>
+                        <li><a href="#">Plans</a></li>
+                        <li><a href="#">Deals</a></li>
+                        <li><a href="#">5G</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search devices...">
+                    </div>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-banner">
+        <div class="container">
+            <h1>Get the Latest Smartphone</h1>
+            <p>Upgrade today with America's most reliable network</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="product-page">
+            <div class="product-image">
+                <img id="phone-image" src="" alt="Smartphone">
+            </div>
+            <div class="product-details">
+                <h1 class="product-title" id="model-name">Loading...</h1>
+                <div class="product-model" id="model-number">Model: Loading...</div>
+                <div class="product-price" id="price-display">$0.00</div>
+                <p class="product-description" id="phone-description">Experience the next generation of mobile technology with our latest smartphone. Featuring cutting-edge specifications and premium design.</p>
+
+                <table class="specs-table" id="specs-table">
+                    <thead>
+                        <tr>
+                            <th>Specification</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="specs-body">
+                        <!-- Specs will be populated by JavaScript -->
+                    </tbody>
+                </table>
+
+                <div class="purchase-options">
+                    <div class="option-title">Purchase Option</div>
+                    <div class="purchase-option active">
+                        <input type="radio" name="purchase-option" checked>
+                        <div class="option-details">
+                            <div class="option-title-small">One-Time Purchase</div>
+                            <div class="option-description">Pay in full today. No contracts or monthly payments.</div>
+                        </div>
+                        <div class="option-price" id="final-price">$0.00</div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn request-btn" id="request-info">
+                        <i class="fas fa-id-card"></i> Get Request Token
+                    </button>
+                    <button class="action-btn" id="save-product">
+                        <i class="fas fa-bookmark"></i> Save for Later
+                    </button>
+                </div>
+
+                <div class="add-to-cart-section">
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request ID Modal -->
+    <div class="request-modal" id="requestModal">
+        <div class="request-modal-content">
+            <h2><i class="fas fa-id-card"></i> Request Submitted</h2>
+            <p>Your product information request has been submitted successfully.</p>
+
+            <div class="request-id-display">
+                <span id="requestIdText">REQ-5A8B2C9D</span>
+                <button class="copy-btn" id="copyRequestId">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+
+            <div class="request-info">
+                <p><strong>Please save your Request ID for future reference.</strong></p>
+                <p>You can use this ID to track your request or reference it when contacting our support team.</p>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="closeRequestModal">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i> Request ID copied to clipboard!
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="#">Smartphones</a></li>
+                        <li><a href="#">Tablets</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Wearables</a></li>
+                        <li><a href="#">Prepaid Phones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="#">Unlimited Plans</a></li>
+                        <li><a href="#">5G Plans</a></li>
+                        <li><a href="#">Family Plans</a></li>
+                        <li><a href="#">Prepaid Plans</a></li>
+                        <li><a href="#">International Plans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Store Locator</a></li>
+                        <li><a href="#">My Verizon</a></li>
+                        <li><a href="#">Device Support</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About Verizon</h3>
+                    <ul>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Verizon. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to get URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                media: params.get('media') || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                modelName: params.get('modelName') || 'Premium Smartphone',
+                modelNumber: params.get('modelNumber') || 'PS-2023',
+                price: params.get('price') || '799.99',
+                specs: params.get('specs') || 'Display:6.7-inch OLED|Processor:Octa-core|RAM:8GB|Storage:128GB|Camera:Triple 48MP|Battery:5000mAh|OS:Android 13'
+            };
+        }
+
+        // Function to parse specs string into an object
+        function parseSpecs(specsString) {
+            const specsArray = specsString.split('|');
+            const specs = {};
+
+            specsArray.forEach(spec => {
+                const [key, value] = spec.split(':');
+                specs[key.trim()] = value.trim();
+            });
+
+            return specs;
+        }
+
+        // Function to format price
+        function formatPrice(price) {
+            return `$${parseFloat(price).toFixed(2)}`;
+        }
+
+        // Function to generate a random request ID
+        function generateRequestId() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = 'REQ-';
+            for (let i = 0; i < 8; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Function to update the page with the parameters
+        function updatePageWithParams() {
+            const params = getUrlParams();
+
+            // Update image
+            document.getElementById('phone-image').src = params.media;
+            document.getElementById('phone-image').alt = params.modelName;
+
+            // Update model name and number
+            document.getElementById('model-name').textContent = params.modelName;
+            document.getElementById('model-number').textContent = `Model: ${params.modelNumber}`;
+
+            // Update price
+            const formattedPrice = formatPrice(params.price);
+            document.getElementById('price-display').textContent = formattedPrice;
+            document.getElementById('final-price').textContent = formattedPrice;
+
+            // Update specs table
+            const specs = parseSpecs(params.specs);
+            const specsBody = document.getElementById('specs-body');
+            specsBody.innerHTML = '';
+
+            for (const [key, value] of Object.entries(specs)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${key}</td>
+                    <td>${value}</td>
+                `;
+                specsBody.appendChild(row);
+            }
+
+            // Update description based on model name
+            document.getElementById('phone-description').textContent =
+                `Experience the next generation of mobile technology with the ${params.modelName}. Featuring cutting-edge specifications and premium design.`;
+        }
+
+        // Function to show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            notification.classList.add('active');
+
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 3000);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePageWithParams();
+
+            // Add interactivity to options
+            const colorOptions = document.querySelectorAll('.color-option');
+            const storageOptions = document.querySelectorAll('.storage-option');
+            const addToCartButton = document.querySelector('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            const requestModal = document.getElementById('requestModal');
+            const requestInfoBtn = document.getElementById('request-info');
+            const closeRequestModalBtn = document.getElementById('closeRequestModal');
+            const copyRequestIdBtn = document.getElementById('copyRequestId');
+            const requestIdText = document.getElementById('requestIdText');
+            const saveProductBtn = document.getElementById('save-product');
+
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    colorOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            storageOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    storageOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            addToCartButton.addEventListener('click', function() {
+                let count = parseInt(cartCount.textContent);
+                count++;
+                cartCount.textContent = count;
+
+                // Show confirmation
+                this.innerHTML = '<i class="fas fa-check"></i> Added to Cart';
+                this.style.backgroundColor = '#28a745';
+
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
+                    this.style.backgroundColor = '';
+                }, 2000);
+            });
+
+            // Request ID functionality
+            requestInfoBtn.addEventListener('click', function() {
+                // Generate a new request ID
+                const requestId = generateRequestId();
+                requestIdText.textContent = requestId;
+
+                // Show the modal
+                requestModal.classList.add('active');
+            });
+
+            closeRequestModalBtn.addEventListener('click', function() {
+                requestModal.classList.remove('active');
+            });
+
+            copyRequestIdBtn.addEventListener('click', function() {
+                // Copy request ID to clipboard
+                navigator.clipboard.writeText(requestIdText.textContent)
+                    .then(() => {
+                        showNotification('Request ID copied to clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = requestIdText.textContent;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        showNotification('Request ID copied to clipboard!');
+                    });
+            });
+
+            // Save product functionality
+            saveProductBtn.addEventListener('click', function() {
+                showNotification('Product saved for later!');
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === requestModal) {
+                    requestModal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
