@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guardarian - Buy Bitcoin</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      max-width: 450px;
+      margin: 50px auto;
+      background: linear-gradient(135deg, #f7f7f7 0%, #e8f4fd 100%);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1a5fb4;
+      margin-bottom: 5px;
+    }
+    .tagline {
+      color: #666;
+      font-size: 14px;
+      margin-top: 0;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+    input:focus {
+      outline: none;
+      border-color: #1a5fb4;
+      box-shadow: 0 0 0 2px rgba(26, 95, 180, 0.25);
+    }
+    .amount-group {
+      display: flex;
+      gap: 10px;
+    }
+    .amount-group input {
+      flex: 1;
+    }
+    .amount-group select {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      min-width: 80px;
+    }
+    .summary {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.1em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .summary div {
+      margin: 8px 0;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+      margin-bottom: 25px;
+      color: #1a5fb4;
+    }
+    button.checkout {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      font-size: 1.1em;
+      background: linear-gradient(to right, #1a5fb4, #2d7cd6);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+    button.checkout:hover {
+      background: linear-gradient(to right, #154b8c, #1a5fb4);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    button.checkout:active {
+      transform: translateY(0);
+    }
+    .note {
+      font-size: 0.9em;
+      color: #666;
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.4;
+    }
+    .secured {
+      text-align: center;
+      margin-top: 25px;
+      font-weight: bold;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .secured-icon {
+      color: #4caf50;
+      font-size: 1.2em;
+    }
+    .error {
+      color: #e74c3c;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: none;
+    }
+    .exchange-rate {
+      font-size: 0.85em;
+      color: #666;
+      margin-top: 5px;
+      text-align: center;
+    }
+    .price-info {
+      background: #f0f8ff;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    .quick-amounts {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .quick-amount {
+      flex: 1;
+      padding: 8px;
+      background: #f0f0f0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .quick-amount:hover {
+      background: #e0e0e0;
+    }
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #1a5fb4;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">GUARDARIAN</div>
+  <p class="tagline">Secure Crypto Exchange</p>
+</div>
+
+<h2>Buy Bitcoin</h2>
+
+<div class="price-info">
+  <div>Current BTC Price: <strong id="current-btc-price">Loading...</strong></div>
+</div>
+
+<form id="btc-purchase-form">
+  <div class="form-group">
+    <label for="btc-address">Bitcoin Address</label>
+    <input type="text" id="btc-address" placeholder="Enter your Bitcoin wallet address" required>
+    <div class="error" id="address-error">Please enter a valid Bitcoin address</div>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount to Spend</label>
+    <div class="amount-group">
+      <input type="number" id="amount" placeholder="Enter amount" min="10" step="0.01" required>
+      <select id="currency">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+      </select>
+    </div>
+    <div class="quick-amounts">
+      <button type="button" class="quick-amount" data-amount="50">50</button>
+      <button type="button" class="quick-amount" data-amount="100">100</button>
+      <button type="button" class="quick-amount" data-amount="250">250</button>
+      <button type="button" class="quick-amount" data-amount="500">500</button>
+    </div>
+    <div class="error" id="amount-error">Please enter a valid amount (minimum $10)</div>
+  </div>
+
+  <div class="summary">
+    <div>You will receive: <strong id="btc-amount">0.00000000 BTC</strong></div>
+    <div class="exchange-rate" id="exchange-rate">Exchange rate: Loading...</div>
+  </div>
+
+  <div class="total" id="total-amount">Total: 0.00 USD</div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Processing your order...</p>
+  </div>
+
+  <button type="submit" class="checkout" id="checkout-button">Proceed to Checkout</button>
+</form>
+
+<p class="note">NOTE: Transactions may take 10-30 minutes to process. Ensure your Bitcoin address is correct.</p>
+
+<div class="secured">
+  <span class="secured-icon">✓</span> Secured by Guardarian
+</div>
+
+<script>
+  // Function to get URL parameters
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Function to validate Bitcoin address (basic validation)
+  function validateBitcoinAddress(address) {
+    // Basic regex for Bitcoin address validation
+    // This is a simplified version - real validation would be more complex
+    const btcRegex = /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}$/;
+    return btcRegex.test(address);
+  }
+
+  // Function to update Bitcoin amount based on user input and BTC rate
+  function updateBitcoinAmount() {
+    const amount = parseFloat(document.getElementById('amount').value) || 0;
+    const currency = document.getElementById('currency').value;
+    const btcRate = parseFloat(getQueryParam('br')) || 45000; // Default fallback
+    
+    if (amount > 0 && btcRate > 0) {
+      const btcAmount = amount / btcRate;
+      document.getElementById('btc-amount').textContent = btcAmount.toFixed(8) + ' BTC';
+      document.getElementById('total-amount').textContent = `Total: ${amount.toFixed(2)} ${currency}`;
+      document.getElementById('exchange-rate').textContent = `Exchange rate: 1 BTC = ${btcRate.toLocaleString()} ${currency}`;
+      document.getElementById('current-btc-price').textContent = `${btcRate.toLocaleString()} ${currency}`;
+    } else {
+      document.getElementById('btc-amount').textContent = '0.00000000 BTC';
+      document.getElementById('total-amount').textContent = `Total: 0.00 ${currency}`;
+    }
+  }
+
+  // Function to redirect to checkout page with order details
+  function redirectToCheckout(address, amount, currency, btcAmount) {
+    // Show loading indicator
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('checkout-button').style.display = 'none';
+    
+    // Get BTC rate from URL or use default
+    const btcRate = parseFloat(getQueryParam('br')) || 45000;
+    
+    // Get order ID from URL if available
+    const orderId = getQueryParam('orderId') || 'BTC-' + Date.now();
+    
+    // Build checkout URL with parameters
+    const checkoutUrl = `checkout.html?orderId=${encodeURIComponent(orderId)}&amount=${encodeURIComponent(amount)}&currency=${encodeURIComponent(currency)}&btcAmount=${encodeURIComponent(btcAmount)}&btcRate=${encodeURIComponent(btcRate)}`;
+    
+    // Redirect after a short delay to show loading state
+    setTimeout(() => {
+      window.location.href = checkoutUrl;
+    }, 1000);
+  }
+
+  // Function to handle form submission
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    const address = document.getElementById('btc-address').value;
+    const amount = parseFloat(document.getElementById('amount').value);
+    const currency = document.getElementById('currency').value;
+    const btcRate = parseFloat(getQueryParam('btcRate')) || 45000;
+    
+    // Reset errors
+    document.getElementById('address-error').style.display = 'none';
+    document.getElementById('amount-error').style.display = 'none';
+    
+    let isValid = true;
+    
+    // Validate Bitcoin address
+    if (!validateBitcoinAddress(address)) {
+      document.getElementById('address-error').style.display = 'block';
+      isValid = false;
+    }
+    
+    // Validate amount
+    if (!amount || amount < 10) {
+      document.getElementById('amount-error').style.display = 'block';
+      isValid = false;
+    }
+    
+    if (isValid) {
+      const btcAmount = amount / btcRate;
+      redirectToCheckout(address, amount, currency, btcAmount);
+    }
+  }
+
+  // Initialize page when it loads
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set up event listeners
+    document.getElementById('amount').addEventListener('input', updateBitcoinAmount);
+    document.getElementById('currency').addEventListener('change', updateBitcoinAmount);
+    document.getElementById('btc-purchase-form').addEventListener('submit', handleFormSubmit);
+    
+    // Set up quick amount buttons
+    document.querySelectorAll('.quick-amount').forEach(button => {
+      button.addEventListener('click', function() {
+        const amount = this.getAttribute('data-amount');
+        document.getElementById('amount').value = amount;
+        updateBitcoinAmount();
+      });
+    });
+    
+    // Pre-fill form with URL parameters if available
+    const address = getQueryParam('address');
+    const amount = getQueryParam('amount');
+    const currency = getQueryParam('currency') || 'USD';
+    
+    if (address) document.getElementById('btc-address').value = address;
+    if (amount) document.getElementById('amount').value = amount;
+    if (currency) document.getElementById('currency').value = currency;
+    
+    // Update page title with order ID if available
+    const orderId = getQueryParam('orderId');
+    if (orderId) {
+      document.title = `Guardarian - Order #${orderId}`;
+    }
+    
+    // Initial update
+    updateBitcoinAmount();
+  });
+</script>
+
+</body>
+</html>
