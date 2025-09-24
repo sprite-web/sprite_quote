@@ -345,6 +345,68 @@
             font-size: 20px;
         }
 
+        /* Customer Info Modal */
+        .customer-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .customer-modal.active {
+            display: flex;
+        }
+
+        .customer-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .customer-modal h2 {
+            margin-bottom: 20px;
+            color: var(--verizon-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .customer-modal h2 i {
+            color: var(--verizon-red);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
         /* Request ID Modal */
         .request-modal {
             display: none;
@@ -433,7 +495,7 @@
 
         .modal-actions {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             gap: 10px;
             margin-top: 20px;
         }
@@ -762,10 +824,36 @@
         </div>
     </div>
 
+    <!-- Customer Information Modal -->
+    <div class="customer-modal" id="customerModal">
+        <div class="customer-modal-content">
+            <h2><i class="fas fa-user"></i> Customer Information</h2>
+            <p>Please provide your details to generate a request token.</p>
+            <form id="customerForm">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="phone-number">Phone Number</label>
+                    <input type="tel" id="phone-number" required placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="home-address">Home Address</label>
+                    <textarea id="home-address" required placeholder="Enter your complete home address"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelCustomer">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Generate Token</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Request ID Modal -->
     <div class="request-modal" id="requestModal">
         <div class="request-modal-content">
-            <h2><i class="fas fa-id-card"></i> Request Submitted</h2>
+            <h2><i class="fas fa-id-card"></i> Request Token Generated</h2>
             <p>Your product information request has been submitted successfully.</p>
 
             <div class="request-id-display">
@@ -776,8 +864,10 @@
             </div>
 
             <div class="request-info">
-                <p><strong>Please save your Request ID for future reference.</strong></p>
-                <p>You can use this ID to track your request or reference it when contacting our support team.</p>
+                <p><strong>Please save your Request Token for future reference.</strong></p>
+                <p>You can use this token to track your request or reference it when contacting our support team.</p>
+                <p><strong>Customer Details:</strong></p>
+                <p id="customerDetails">Name: John Doe<br>Phone: (555) 123-4567<br>Address: 123 Main St, Anytown, USA</p>
             </div>
 
             <div class="modal-actions">
@@ -788,7 +878,7 @@
 
     <!-- Notification -->
     <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i> Request ID copied to clipboard!
+        <i class="fas fa-check-circle"></i> Request Token copied to clipboard!
     </div>
 
     <footer>
@@ -944,11 +1034,15 @@
             const storageOptions = document.querySelectorAll('.storage-option');
             const addToCartButton = document.querySelector('.add-to-cart');
             const cartCount = document.querySelector('.cart-count');
+            const customerModal = document.getElementById('customerModal');
             const requestModal = document.getElementById('requestModal');
             const requestInfoBtn = document.getElementById('request-info');
+            const customerForm = document.getElementById('customerForm');
+            const cancelCustomerBtn = document.getElementById('cancelCustomer');
             const closeRequestModalBtn = document.getElementById('closeRequestModal');
             const copyRequestIdBtn = document.getElementById('copyRequestId');
             const requestIdText = document.getElementById('requestIdText');
+            const customerDetails = document.getElementById('customerDetails');
             const saveProductBtn = document.getElementById('save-product');
 
             colorOptions.forEach(option => {
@@ -980,14 +1074,44 @@
                 }, 2000);
             });
 
-            // Request ID functionality
+            // Request Token functionality
             requestInfoBtn.addEventListener('click', function() {
+                // Show customer information modal first
+                customerModal.classList.add('active');
+            });
+
+            // Customer form submission
+            customerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const fullName = document.getElementById('full-name').value;
+                const phoneNumber = document.getElementById('phone-number').value;
+                const homeAddress = document.getElementById('home-address').value;
+                
+                // Validate form
+                if (!fullName || !phoneNumber || !homeAddress) {
+                    showNotification('Please fill in all fields');
+                    return;
+                }
+                
                 // Generate a new request ID
                 const requestId = generateRequestId();
                 requestIdText.textContent = requestId;
-
-                // Show the modal
+                
+                // Update customer details in the request modal
+                customerDetails.innerHTML = `Name: ${fullName}<br>Phone: ${phoneNumber}<br>Address: ${homeAddress}`;
+                
+                // Close customer modal and show request modal
+                customerModal.classList.remove('active');
                 requestModal.classList.add('active');
+                
+                // Reset form
+                customerForm.reset();
+            });
+
+            cancelCustomerBtn.addEventListener('click', function() {
+                customerModal.classList.remove('active');
+                customerForm.reset();
             });
 
             closeRequestModalBtn.addEventListener('click', function() {
@@ -998,7 +1122,7 @@
                 // Copy request ID to clipboard
                 navigator.clipboard.writeText(requestIdText.textContent)
                     .then(() => {
-                        showNotification('Request ID copied to clipboard!');
+                        showNotification('Request Token copied to clipboard!');
                     })
                     .catch(err => {
                         console.error('Failed to copy: ', err);
@@ -1009,7 +1133,7 @@
                         textArea.select();
                         document.execCommand('copy');
                         document.body.removeChild(textArea);
-                        showNotification('Request ID copied to clipboard!');
+                        showNotification('Request Token copied to clipboard!');
                     });
             });
 
@@ -1018,8 +1142,12 @@
                 showNotification('Product saved for later!');
             });
 
-            // Close modal when clicking outside
+            // Close modals when clicking outside
             window.addEventListener('click', function(e) {
+                if (e.target === customerModal) {
+                    customerModal.classList.remove('active');
+                    customerForm.reset();
+                }
                 if (e.target === requestModal) {
                     requestModal.classList.remove('active');
                 }
