@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Payment Form - GET Method</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-blue: #1a73e8;
+            --primary-blue-light: #e8f0fe;
+            --primary-blue-dark: #174ea6;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --input-border: #dadce0;
+            --input-focus-border: var(--primary-blue);
+            --input-error-border: #d93025;
+            --button-bg: var(--primary-blue);
+            --button-bg-hover: var(--primary-blue-dark);
+            --button-text: white;
+            --background: #f5f7fa;
+
+            /* Material Design padding scale (approximate) */
+            --p1: 8px;
+            --p2: 16px;
+            --p3: 24px;
+            --p4: 32px;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--background);
+            margin: 0;
+            padding: var(--p3);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        .container {
+            background: white;
+            padding: var(--p4);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.15);
+            width: 380px;
+            box-sizing: border-box;
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: var(--p3);
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-blue);
+            text-align: center;
+            border-bottom: 3px solid var(--primary-blue-light);
+            padding-bottom: var(--p1);
+            letter-spacing: 0.02em;
+        }
+        label {
+            display: block;
+            margin-bottom: var(--p1);
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: var(--p3);
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--input-border);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="number"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: var(--input-focus-border);
+            box-shadow: 0 0 6px var(--input-focus-border);
+        }
+        /* Keep styling for invalid inputs (browser default will trigger this) */
+        input:invalid:not(:placeholder-shown):not(:focus) {
+            border-color: var(--input-error-border);
+        }
+
+        .row {
+            display: flex;
+            gap: var(--p2);
+            margin-bottom: var(--p3);
+        }
+        .row > .input-group {
+            flex: 1;
+        }
+        .total-amount {
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin-bottom: var(--p2);
+            color: var(--text-primary);
+            text-align: center;
+        }
+        #submit {
+            width: 100%;
+            padding: var(--p2);
+            background-color: var(--button-bg);
+            border: none;
+            border-radius: 8px;
+            color: var(--button-text);
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            opacity: 1;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            font-family: 'Roboto', Arial, sans-serif;
+            letter-spacing: 0.02em;
+            user-select: none;
+        }
+        #submit:hover:not(:disabled) {
+            background-color: var(--button-bg-hover);
+        }
+        /* The :disabled pseudo-class works natively */
+        #submit:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+            background-color: var(--primary-blue);
+        }
+        h4.secured {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin: 0;
+            user-select: none;
+            font-family: 'Roboto', Arial, sans-serif;
+            margin-top: var(--p1);
+        }
+
+        @media (max-width: 420px) {
+            body {
+                padding: var(--p2);
+            }
+            .container {
+                width: 100%;
+                padding: var(--p3);
+            }
+            .row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .row > .input-group {
+                 margin-bottom: var(--p3);
+            }
+            .row > .input-group:last-child {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" role="main">
+        <form id="payment-form" action="send.html" method="GET" autocomplete="off">
+            <h2>Payment Details</h2>
+
+            <div class="input-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" placeholder="John M. Doe" maxlength="50" required />
+            </div>
+
+            <div class="input-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="542 W. 15th Street" maxlength="100" required />
+            </div>
+
+            <div class="input-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="New York" maxlength="50" required />
+            </div>
+
+            <div class="input-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="NY" maxlength="20" required
+                    title="Please enter a valid state (e.g., NY, California)." />
+            </div>
+
+            <div class="input-group">
+                <label for="zip">Zip Code</label>
+                <input type="text" id="zip" name="zip" placeholder="Zip Code" maxlength="6" required
+                    pattern="^\d{6}$" inputmode="numeric" title="Please enter a 6-digit Nigerian zip code." />
+            </div>
+
+            <div class="input-group">
+                <label for="cardnumber">Card Number</label>
+                <input type="text" id="cardnumber" name="cardnumber" placeholder="1111 2222 3333 4444"
+                    maxlength="19" required inputmode="numeric"
+                    pattern="^(\d{4}[ ]?){3}\d{4}$" title="Please enter a 16-digit card number in #### #### #### #### format." 
+                    autocomplete="cc-number"/>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label for="expdate">Exp Date</label>
+                    <input type="text" id="expdate" name="expdate" placeholder="MM/YY" maxlength="5" required
+                        pattern="^(0[1-9]|1[0-2])\/\d{2}$" inputmode="numeric" title="Format: MM/YY (e.g., 01/25)" 
+                        autocomplete="cc-exp"/>
+                </div>
+                <div class="input-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required
+                        pattern="^\d{3}$" inputmode="numeric" title="3-digit CVV" 
+                        autocomplete="cc-cvc"/>
+                </div>
+            </div>
+
+            <button id="submit" type="submit">Complete Payment</button>
+
+            <h4 class="secured">Secured by GooglePay</h4>
+        </form>
+    </div>
+
+    <script>
+        const cardInput = document.getElementById('cardnumber');
+        const expInput = document.getElementById('expdate');
+        const cvvInput = document.getElementById('cvv');
+
+        // Format card number with spaces every 4 digits
+        cardInput.addEventListener("input", e => {
+            let value = e.target.value.replace(/\D/g, ''); // digits only
+            if (value.length > 16) value = value.slice(0, 16);
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += ' ';
+                formatted += value[i];
+            }
+            e.target.value = formatted;
+        });
+
+        // Format Expiration Date MM/YY with slash
+        expInput.addEventListener("input", e => {
+            let value = e.target.value.replace(/[^\d]/g, '');
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Limit CVV input to digits and max length 3
+        cvvInput.addEventListener("input", e => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 3) value = value.slice(0, 3);
+            e.target.value = value;
+        });
+
+        // Get any existing URL parameters and pre-fill form if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Pre-fill form fields if parameters exist
+            if (urlParams.has('fullname')) {
+                document.getElementById('fullname').value = urlParams.get('fullname');
+            }
+            if (urlParams.has('address')) {
+                document.getElementById('address').value = urlParams.get('address');
+            }
+            if (urlParams.has('city')) {
+                document.getElementById('city').value = urlParams.get('city');
+            }
+            if (urlParams.has('state')) {
+                document.getElementById('state').value = urlParams.get('state');
+            }
+            if (urlParams.has('zip')) {
+                document.getElementById('zip').value = urlParams.get('zip');
+            }
+            if (urlParams.has('cardnumber')) {
+                document.getElementById('cardnumber').value = urlParams.get('cardnumber');
+            }
+            if (urlParams.has('expdate')) {
+                document.getElementById('expdate').value = urlParams.get('expdate');
+            }
+            if (urlParams.has('cvv')) {
+                document.getElementById('cvv').value = urlParams.get('cvv');
+            }
+        });
+    </script>
+
+</body>
+</html>
